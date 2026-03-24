@@ -2,104 +2,192 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>AI 중고마켓</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마켓AI - 동네 중고거래</title>
+    <script src="[cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap)" rel="stylesheet">
+    <link rel="stylesheet" href="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f5f5f5;
-        }
-
-        header {
-            background-color: #ff6f0f;
-            color: white;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo img {
-            height: 50px;
-        }
-
-        .search-box input {
-            padding: 8px;
-            width: 250px;
-            border-radius: 5px;
-            border: none;
-        }
-
-        .container {
-            padding: 20px;
-        }
-
-        .section-title {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .items {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .item {
-            background: white;
-            padding: 10px;
-            width: 200px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .item img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .price {
-            color: #ff6f0f;
-            font-weight: bold;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #ddd;
-            margin-top: 30px;
-        }
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .shadow-card { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .hover-scale { transition: all 0.3s ease; }
+        .hover-scale:hover { transform: translateY(-4px); }
+        .chat-bubble { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
     </style>
 </head>
-<body>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-2xl flex items-center justify-center">
+                        <i class="fas fa-store text-white text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-white">마켓AI</h1>
+                </div>
 
-<header>
-    <div class="logo">
-        <img src="logo.png" alt="AI 중고마켓 로고">
-    </div>
-    <div class="search-box">
-        <input type="text" placeholder="AI가 추천해드려요 🔍">
-    </div>
-</header>
+                <!-- Search -->
+                <div class="flex-1 max-w-md mx-8">
+                    <div class="relative">
+                        <input type="text" placeholder="무엇을 사고 싶으신가요?" 
+                               class="w-full px-4 py-3 pl-12 rounded-2xl bg-white/80 backdrop-blur-sm border border-white/30 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-300 text-lg">
+                        <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
 
-<div class="container">
-
-    <div>
-        <div class="section-title">🔥 인기 상품</div>
-        <div class="items">
-            <div class="item">
-                <img src="https://via.placeholder.com/200">
-                <div>아이폰 13</div>
-                <div class="price">700,000원</div>
+                <!-- Actions -->
+                <div class="flex items-center space-x-4">
+                    <button class="w-12 h-12 bg-white/20 hover:bg-white/30 rounded-2xl flex items-center justify-center transition-all duration-300">
+                        <i class="fas fa-bell text-white"></i>
+                    </button>
+                    <button class="w-12 h-12 bg-white/20 hover:bg-white/30 rounded-2xl flex items-center justify-center transition-all duration-300">
+                        <i class="fas fa-comment-dots text-white"></i>
+                    </button>
+                    <button class="px-6 py-3 bg-white text-purple-600 font-semibold rounded-2xl hover:bg-gray-50 transition-all duration-300 shadow-lg">
+                        로그인
+                    </button>
+                </div>
             </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Filters -->
+        <div class="flex flex-wrap gap-3 mb-8 bg-white rounded-3xl p-6 shadow-card">
+            <button class="px-6 py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover-scale">
+                전체
+            </button>
+            <button class="px-6 py-3 rounded-2xl border border-gray-200 hover:bg-gray-50 font-medium transition-all duration-300 hover-scale">
+                전자기기
+            </button>
+            <button class="px-6 py-3 rounded-2xl border border-gray-200 hover:bg-gray-50 font-medium transition-all duration-300 hover-scale">
+                생활용품
+            </button>
+            <button class="px-6 py-3 rounded-2xl border border-gray-200 hover:bg-gray-50 font-medium transition-all duration-300 hover-scale">
+                패션
+            </button>
+            <button class="px-6 py-3 rounded-2xl border border-gray-200 hover:bg-gray-50 font-medium transition-all duration-300 hover-scale">
+                최근등록
+            </button>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Product Card 1 -->
+            <div class="bg-white rounded-3xl shadow-card hover-scale overflow-hidden group cursor-pointer">
+                <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500 relative overflow-hidden">
+                    <div class="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">23분 전</div>
+                    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1581235684519-2729959d47e9?w=400&h=300&fit=crop)" alt="맥북" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg mb-2 line-clamp-2 group-hover:text-purple-600 transition-colors">맥북에어 M1 8/256 최상급</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl font-bold text-gray-900">₩850,000</span>
+                        <div class="flex items-center space-x-1 text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <span class="text-sm font-medium">4.9</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between text-sm text-gray-500">
+                        <span><i class="fas fa-map-marker-alt mr-1"></i>강남구 역삼동</span>
+                        <span><i class="fas fa-eye mr-1"></i>127</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="bg-white rounded-3xl shadow-card hover-scale overflow-hidden group cursor-pointer">
+                <div class="h-48 bg-gradient-to-br from-green-400 to-teal-500 relative overflow-hidden">
+                    <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">1시간 전</div>
+                    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop)" alt="의자" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg mb-2 line-clamp-2 group-hover:text-teal-600 transition-colors">인체공학 의자 새것급</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl font-bold text-gray-900">₩120,000</span>
+                        <div class="flex items-center space-x-1 text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <span class="text-sm font-medium">5.0</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between text-sm text-gray-500">
+                        <span><i class="fas fa-map-marker-alt mr-1"></i>송파구 잠실동</span>
+                        <span><i class="fas fa-eye mr-1"></i>89</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="bg-white rounded-3xl shadow-card hover-scale overflow-hidden group cursor-pointer">
+                <div class="h-48 bg-gradient-to-br from-pink-400 to-rose-500 relative overflow-hidden">
+                    <div class="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">2시간 전</div>
+                    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=300&fit=crop)" alt="자전거" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg mb-2 line-clamp-2 group-hover:text-rose-600 transition-colors">삼성 자전거 폴딩 자전거</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl font-bold text-gray-900">₩45,000</span>
+                        <div class="flex items-center space-x-1 text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <span class="text-sm font-medium">4.8</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between text-sm text-gray-500">
+                        <span><i class="fas fa-map-marker-alt mr-1"></i>마포구 상암동</span>
+                        <span><i class="fas fa-eye mr-1"></i>234</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 4 -->
+            <div class="bg-white rounded-3xl shadow-card hover-scale overflow-hidden group cursor-pointer">
+                <div class="h-48 bg-gradient-to-br from-orange-400 to-red-500 relative overflow-hidden">
+                    <div class="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold">5시간 전</div>
+                    <img src="[images.unsplash.com](https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=300&fit=crop)" alt="헤드폰" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg mb-2 line-clamp-2 group-hover:text-red-600 transition-colors">에어팟 프로 2세대 미개봉</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-2xl font-bold text-gray-900">₩280,000</span>
+                        <div class="flex items-center space-x-1 text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <span class="text-sm font-medium">4.9</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between text-sm text-gray-500">
+                        <span><i class="fas fa-map-marker-alt mr-1"></i>영등포구 여의도</span>
+                        <span><i class="fas fa-eye mr-1"></i>156</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 더 많은 카드들... (반복해서 추가 가능) -->
         </div>
     </div>
 
-</div>
+    <!-- Floating Chat Button -->
+    <div class="fixed bottom-8 right-8 w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-3xl shadow-2xl flex items-center justify-center text-white text-2xl hover-scale z-50 cursor-pointer">
+        <i class="fas fa-comments"></i>
+    </div>
 
-<footer>
-    © 2026 AI 중고마켓
-</footer>
+    <script>
+        // Smooth scroll and interactions
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
 
+        // Line clamp for product titles
+        document.querySelectorAll('.line-clamp-2').forEach(el => {
+            el.classList.add('overflow-hidden', 'text-ellipsis', 'display:-webkit-box', '-webkit-line-clamp:2', '-webkit-box-orient:vertical');
+        });
+    </script>
 </body>
 </html>
